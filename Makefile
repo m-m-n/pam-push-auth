@@ -3,8 +3,8 @@ CFLAGS = -Wall -Wextra -fPIC
 LDFLAGS = -lpam
 
 TARGET = build/pam_push_auth.so
-SOURCES = src/main.c
-HEADERS = src/config.h
+SOURCE = src/main.c
+HEADER = src/config.h
 SCRIPT = script/login-push
 
 INSTALL_DIR_SO = /usr/lib/x86_64-linux-gnu/security/
@@ -15,9 +15,9 @@ all: $(TARGET)
 config: generate_config.sh
 		bash generate_config.sh
 
-$(TARGET): $(SOURCES) $(HEADERS)
+$(TARGET): $(SOURCE) $(HEADER)
 	mkdir -p build
-	$(CC) $(CFLAGS) -shared $(SOURCES) -o $(TARGET) $(LDFLAGS)
+	$(CC) $(CFLAGS) -shared $(SOURCE) -o $(TARGET) $(LDFLAGS)
 
 install: $(TARGET) $(SCRIPT)
 	install -D $(TARGET) $(INSTALL_DIR_SO)
@@ -29,3 +29,4 @@ uninstall:
 
 clean:
 	rm -f build/*
+	rm -f $(HEADER)
