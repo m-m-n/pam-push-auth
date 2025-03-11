@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+  exit 1
+fi
+
+USER_ID=$1
+DOMAIN=$2
+
+TOKEN=$(curl -s -X POST -H "Content-Type: application/json" -d "{ "userId": "$USER_ID" }" https://$DOMAIN/api/notifications | jq -r .token)
+curl -s https://$DOMAIN/api/authentication/${TOKEN} | jq -r .userId
