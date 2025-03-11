@@ -7,4 +7,12 @@
 3. ビルドする
     - `make`
 4. インストールする
-    - `make install`
+    - `sudo make install`
+
+# アンインストール
+
+1. `sudo make uninstall`
+
+# 成果物の削除
+
+1. `make clean`
