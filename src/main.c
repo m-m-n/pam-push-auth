@@ -23,11 +23,7 @@ int pushAuth(const char *username)
     }
 
     int status = pclose(pipe);
-    if (status != 0) {
-        return status;
-    }
-
-    return 0;
+    return status;
 }
 
 PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc,

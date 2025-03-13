@@ -7,8 +7,8 @@ SOURCE = src/main.c
 HEADER = src/config.h
 SCRIPT = script/login-push
 
-INSTALL_DIR_SO = /usr/lib/x86_64-linux-gnu/security/
-INSTALL_DIR_SCRIPT = /usr/local/bin/
+INSTALL_DIR_SO = /usr/lib/x86_64-linux-gnu/security
+INSTALL_DIR_SCRIPT = /usr/local/bin
 
 all: $(TARGET)
 
@@ -20,8 +20,8 @@ $(TARGET): $(SOURCE) $(HEADER)
 	$(CC) $(CFLAGS) -shared $(SOURCE) -o $(TARGET) $(LDFLAGS)
 
 install: $(TARGET) $(SCRIPT)
-	install -D $(TARGET) $(INSTALL_DIR_SO)
-	install -D $(SCRIPT) $(INSTALL_DIR_SCRIPT)
+	install -D $(TARGET) $(INSTALL_DIR_SO)/
+	install -D $(SCRIPT) $(INSTALL_DIR_SCRIPT)/
 
 uninstall:
 	rm -f $(INSTALL_DIR_SO)/$(notdir $(TARGET))
