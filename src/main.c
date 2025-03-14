@@ -18,11 +18,14 @@ int pushAuth(const char *username)
 
     char buffer[256];
     char stdoutBuffer[256];
-    while (fgets(buffer, sizeof(buffer), pipe) != NULL) {
-        strcat(stdoutBuffer, buffer);
+    if (fgets(buffer, sizeof(buffer), pipe) != NULL) {
+        strncpy(stdoutBuffer, buffer, sizeof(stdoutBuffer));
     }
 
     int status = pclose(pipe);
+    if (strncmp(stdoutBuffer, username, sizeof(stdoutBuffer)) != 0) {
+        return -1;
+    }
     return status;
 }
 
