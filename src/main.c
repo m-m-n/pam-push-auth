@@ -19,11 +19,13 @@ int pushAuth(const char *username)
     char buffer[256];
     char stdoutBuffer[256];
     if (fgets(buffer, sizeof(buffer), pipe) != NULL) {
+        // bufferのtrimをする
+        buffer[strcspn(buffer, "\n")] = 0;
         strncpy(stdoutBuffer, buffer, sizeof(stdoutBuffer));
     }
 
     int status = pclose(pipe);
-    if (strncmp(stdoutBuffer, username, sizeof(stdoutBuffer)) != 0) {
+    if (strcmp(stdoutBuffer, username) != 0) {
         return -1;
     }
     return status;
