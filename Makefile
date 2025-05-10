@@ -20,7 +20,7 @@ $(TARGET): $(SOURCE) $(HEADER)
 	$(CC) $(CFLAGS) -shared $(SOURCE) -o $(TARGET) $(LDFLAGS)
 
 install: $(TARGET) $(SCRIPT)
-	install -D $(TARGET) $(INSTALL_DIR_SO)/
+	install -m 644 -D $(TARGET) $(INSTALL_DIR_SO)/
 	install -D $(SCRIPT) $(INSTALL_DIR_SCRIPT)/
 
 uninstall:

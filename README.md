@@ -1,4 +1,6 @@
-# ビルド方法
+# PAM Push Authentication モジュール
+
+## インストール手順
 
 1. 環境変数 `AUTH_SERVER_BASEURL` を設定する
     - 例) `export AUTH_SERVER_BASEURL="https://login.example.com"`
@@ -9,15 +11,17 @@
 4. インストールする
     - `sudo make install`
 
-# アンインストール
+## アンインストール手順
 
 1. `sudo make uninstall`
 
-# 成果物の削除
+## ビルド成果物の削除
 
 1. `make clean`
 
-# PAMの設定ファイルについて
+## PAM設定ガイド
+
+### 設定例
 
 例) `/etc/pam.d/common-auth`
 
@@ -25,6 +29,8 @@
 # ログインプッシュ通知
 auth sufficient pam_push_auth.so
 ```
+
+### 設定の注意点
 
 通常のパスワードログインは `pam_unix.so` を呼ぶのでその前に設定しておく  
 sufficientとしておくことで成功した場合は以降の処理を行わない
