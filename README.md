@@ -27,10 +27,16 @@
 
 ```conf
 # ログインプッシュ通知
-auth sufficient pam_push_auth.so
+auth [success=3 default=ignore] pam_push_auth.so
 ```
 
 ### 設定の注意点
 
 通常のパスワードログインは `pam_unix.so` を呼ぶのでその前に設定しておく  
-sufficientとしておくことで成功した場合は以降の処理を行わない
+success=3 は成功した場合に次の3行をスキップする  
+もともと以下のような記述がある場合、これに先駆けて実行することでデフォルトのパスワード認証をスキップできる
+```
+auth  [success=2 default=ignore]  pam_unix.so nullok
+auth  [success=1 default=ignore]  pam_sss.so use_first_pass
+auth  requisite     pam_deny.so
+```
